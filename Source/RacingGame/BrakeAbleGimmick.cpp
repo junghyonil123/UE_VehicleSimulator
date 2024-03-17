@@ -2,12 +2,15 @@
 
 
 #include "BrakeAbleGimmick.h"
+#include "GeometryCollection/GeometryCollectionComponent.h"
 
 // Sets default values
 ABrakeAbleGimmick::ABrakeAbleGimmick()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	GeometryComponent = FindComponentByClass<UGeometryCollectionComponent>();
 
 }
 

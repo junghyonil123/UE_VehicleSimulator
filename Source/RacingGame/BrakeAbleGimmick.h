@@ -23,8 +23,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-protected:	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
-	TObjectPtr<class UBoxComponent> UBoxComponent;
+//public:
+//	UPROPERTY(EditAnywhere, Category = Hyonil)
+//	TObjectPtr<class UBoxComponent> UBoxComponent;
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Components")
+	TObjectPtr<class UGeometryCollectionComponent> GeometryComponent;
 
 };
