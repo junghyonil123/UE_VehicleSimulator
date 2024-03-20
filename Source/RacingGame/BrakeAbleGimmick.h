@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GeometryCollection/GeometryCollectionComponent.h"
 #include "BrakeAbleGimmick.generated.h"
 
 UCLASS()
@@ -27,6 +28,21 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = Hyonil)
 	TObjectPtr<class UBoxComponent> BoxComponent;
 
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = Hyonil)
+	float MaxHp;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = Hyonil)
+	float CurrentHp;
+
+
+protected:
+	virtual void PostInitializeComponents() override;
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = Hyonil)
+	TObjectPtr<UBoxComponent> Trigger;
+
+	UFUNCTION()
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepHitResult);
 //protected:
 //	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Components")
 //	TObjectPtr<class UGeometryCollectionComponent> GeometryComponent;
