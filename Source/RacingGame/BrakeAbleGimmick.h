@@ -7,6 +7,8 @@
 #include "GeometryCollection/GeometryCollectionComponent.h"
 #include "BrakeAbleGimmick.generated.h"
 
+DECLARE_MULTICAST_DELEGATE(OnHPChangeDelegate);
+
 UCLASS()
 class RACINGGAME_API ABrakeAbleGimmick : public AActor
 {
@@ -23,6 +25,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	OnHPChangeDelegate OnHpChanged;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = Hyonil)
@@ -31,13 +34,14 @@ public:
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = Hyonil)
 	float MaxHp;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = Hyonil)
+	FORCEINLINE void SetCurrentHP(float value) { CurrentHp = FMath::Clamp(CurrentHp + value, CurrentHp + value, MaxHp); OnHpChanged.Broadcast(); }
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
+	TObjectPtr<class UWidgetComponent> HPBarWidget;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	float CurrentHp;
-
 
 protected:
 	virtual void PostInitializeComponents() override;
-protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = Hyonil)
 	TObjectPtr<UBoxComponent> Trigger;
 
