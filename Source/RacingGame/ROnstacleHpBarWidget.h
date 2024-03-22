@@ -17,8 +17,10 @@ class RACINGGAME_API UROnstacleHpBarWidget : public UUserWidget
 	protected:
 	UROnstacleHpBarWidget(const FObjectInitializer& ObjectInitializer);
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	TObjectPtr<class UProgressBar> HpProgressBar;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
+	TObjectPtr<class UWidget> WidgetTemp;
 
 	virtual void NativeConstruct() override;
 

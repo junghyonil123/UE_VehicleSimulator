@@ -44,8 +44,16 @@ void ABrakeAbleGimmick::BeginPlay()
 	Trigger->OnComponentBeginOverlap.AddDynamic(this, &ABrakeAbleGimmick::OnOverlapBegin);
 
 	OnHpChanged.AddLambda([this]() -> void {
-		Cast<UROnstacleHpBarWidget>(HPBarWidget->GetUserWidgetObject())->SetHpBarValue(MaxHp, CurrentHp);
-		});
+		UE_LOG(LogTemp, Warning, TEXT("Delegate"));
+		
+		auto HpBarWidgetTemp = Cast<UROnstacleHpBarWidget>(HPBarWidget->GetUserWidgetObject());
+
+		if (HpBarWidgetTemp)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Set"));
+			HpBarWidgetTemp->SetHpBarValue(MaxHp, CurrentHp);
+		}
+	});
 
 	SetCurrentHP(MaxHp);
 }

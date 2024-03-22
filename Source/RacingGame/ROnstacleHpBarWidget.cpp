@@ -10,8 +10,10 @@ UROnstacleHpBarWidget::UROnstacleHpBarWidget(const FObjectInitializer& ObjectIni
 
 void UROnstacleHpBarWidget::NativeConstruct()
 {
-	HpProgressBar = Cast<UProgressBar>(GetWidgetFromName(TEXT("HpBar")));
+	WidgetTemp = GetWidgetFromName(TEXT("HpBar"));
+	HpProgressBar = Cast<UProgressBar>(WidgetTemp);
 	ensure(HpProgressBar);
+	UE_LOG(LogTemp, Warning, TEXT("Finded"));
 }
 
 void UROnstacleHpBarWidget::SetHpBarValue(float MaxHp, float CurHp)
@@ -19,5 +21,9 @@ void UROnstacleHpBarWidget::SetHpBarValue(float MaxHp, float CurHp)
 	if (HpProgressBar != nullptr)
 	{
 		HpProgressBar->SetPercent(CurHp / MaxHp);
+	}
+	else 
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ItsNull"));
 	}
 }
