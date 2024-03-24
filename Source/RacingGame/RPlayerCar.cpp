@@ -10,7 +10,6 @@ void ARPlayerCar::BeginPlay()
 {
 	Super::BeginPlay();
 	WheeledComponent = Cast<UChaosWheeledVehicleMovementComponent>(GetVehicleMovement());
-
 }
 
 void ARPlayerCar::Tick(float DeltaTime)

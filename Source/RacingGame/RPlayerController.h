@@ -17,4 +17,9 @@ class RACINGGAME_API ARPlayerController : public APlayerController
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	TObjectPtr<class URHUD> URHUDObject;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
+	int8 IsBoosterOn;
 };
+
+
