@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "WheeledVehiclePawn.h"
+#include "InputActionValue.h"
 #include "RPlayerCar.generated.h"
 
 /**
@@ -19,14 +20,14 @@ class RACINGGAME_API ARPlayerCar : public AWheeledVehiclePawn
 	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
 
-	void AddBosster(float value);
-	void BossterOn(const struct FInputActionValue& value);
+	void AddBosster(int value);
+	void BossterOn(const FInputActionValue& value);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
-	float MaxBoosterGauge;
+	int32 MaxBoosterGauge;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
-	float CurrentBoosterGauge;
+	int32 CurrentBoosterGauge;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	TObjectPtr<class UChaosWheeledVehicleMovementComponent> WheeledComponent;

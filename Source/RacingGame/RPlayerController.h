@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "InputActionValue.h"
 #include "RPlayerController.generated.h"
 
 /**
@@ -17,7 +18,7 @@ class RACINGGAME_API ARPlayerController : public APlayerController
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	TObjectPtr<class URHUD> URHUDObject;
-	void BossterOn();
+	void BossterOn(const FInputActionValue& value);
 
 public:
 	virtual void BeginPlay() override;

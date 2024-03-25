@@ -34,7 +34,7 @@ void ARPlayerCar::Tick(float DeltaTime)
 	}
 }
 
-void ARPlayerCar::AddBosster(float value)
+void ARPlayerCar::AddBosster(int value)
 {
 	if (CurrentBoosterGauge + value < MaxBoosterGauge)
 	{
@@ -42,7 +42,7 @@ void ARPlayerCar::AddBosster(float value)
 	}
 	else 
 	{
-		CurrentBoosterGauge = 0;
+		CurrentBoosterGauge = MaxBoosterGauge;
 	}
 
 	//해드업 디스플레이에 현재 값 반영
@@ -50,5 +50,10 @@ void ARPlayerCar::AddBosster(float value)
 
 void ARPlayerCar::BossterOn(const FInputActionValue& value)
 {
-	UE_LOG(LogTemp, Error, TEXT("Booster"));
+	if (CurrentBoosterGauge == MaxBoosterGauge)
+	{
+		UE_LOG(LogTemp, Error, TEXT("BoosterOn"));
+		CurrentBoosterGauge = 0;
+		WheeledComponent->IncreaseThrottleInput(1);
+	}
 }
