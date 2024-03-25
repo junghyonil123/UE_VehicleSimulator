@@ -13,17 +13,10 @@
 // Sets default values
 ABrakeAbleGimmick::ABrakeAbleGimmick()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	//BoxComponent = GetOwner()->FindComponentByClass<UBoxComponent>();
 	MaxHp = 100;
-	/*Trigger = Cast<UBoxComponent>(GetOwner()->GetDefaultSubobjectByName(FName(TEXT("Box"))));*/
-	Trigger = CreateDefaultSubobject<UBoxComponent>(TEXT("TriggerBox"));
-	Trigger->SetBoxExtent(FVector(40.0f, 42.0f, 30.0f));
-	RootComponent = Trigger;
 
 	HPBarWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("HOBARWIDGET"));
-	HPBarWidget->SetupAttachment(Trigger);
 
 	HPBarWidget->SetRelativeLocation(FVector(0.0f, 0.0f, 180.0f));
 	HPBarWidget->SetWidgetSpace(EWidgetSpace::Screen);

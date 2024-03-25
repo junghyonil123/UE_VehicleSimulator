@@ -4,6 +4,7 @@
 #include "RHUD.h"
 #include "RPlayerCar.h"
 #include "InputActionValue.h"
+#include "RCarStatComponent.h"
 #include "RPlayerController.h"
 
 
@@ -11,6 +12,11 @@ void ARPlayerCar::BeginPlay()
 {
 	Super::BeginPlay();
 	WheeledComponent = Cast<UChaosWheeledVehicleMovementComponent>(GetVehicleMovement());
+}
+
+ARPlayerCar::ARPlayerCar()
+{
+	Stat = CreateDefaultSubobject<URCarStatComponent>(TEXT("Stat"));
 }
 
 void ARPlayerCar::Tick(float DeltaTime)

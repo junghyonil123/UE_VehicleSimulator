@@ -16,9 +16,14 @@ class RACINGGAME_API ARPlayerCar : public AWheeledVehiclePawn
 	GENERATED_BODY()
 	
 	public:
+
+	ARPlayerCar();
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Hyonil)
+	TObjectPtr<class URCarStatComponent> Stat;
 
 	void AddBosster(int value);
 	void BossterOn(const FInputActionValue& value);

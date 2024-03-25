@@ -20,6 +20,7 @@ public:
 	TObjectPtr<class URHUD> URHUDObject;
 	void BossterOn(const FInputActionValue& value);
 
+
 public:
 	virtual void BeginPlay() override;
 protected:

@@ -40,7 +40,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	float CurrentHp;
 
-protected:
+public:
 	virtual void PostInitializeComponents() override;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = Hyonil)
 	TObjectPtr<UBoxComponent> Trigger;
