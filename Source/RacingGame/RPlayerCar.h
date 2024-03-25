@@ -20,7 +20,7 @@ class RACINGGAME_API ARPlayerCar : public AWheeledVehiclePawn
 	virtual void BeginPlay() override;
 
 	void AddBosster(float value);
-	void BossterOn();
+	void BossterOn(const struct FInputActionValue& value);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	float MaxBoosterGauge;
@@ -32,4 +32,5 @@ class RACINGGAME_API ARPlayerCar : public AWheeledVehiclePawn
 	TObjectPtr<class UChaosWheeledVehicleMovementComponent> WheeledComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	TObjectPtr<class URHUD> RHUDObj;
+
 };

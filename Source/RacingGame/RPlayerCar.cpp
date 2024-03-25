@@ -3,6 +3,7 @@
 #include "ChaosVehicles/Public/ChaosWheeledVehicleMovementComponent.h"
 #include "RHUD.h"
 #include "RPlayerCar.h"
+#include "InputActionValue.h"
 #include "RPlayerController.h"
 
 
@@ -42,12 +43,12 @@ void ARPlayerCar::AddBosster(float value)
 	else 
 	{
 		CurrentBoosterGauge = 0;
-		BossterOn();
 	}
 
 	//해드업 디스플레이에 현재 값 반영
 }
 
-void ARPlayerCar::BossterOn()
+void ARPlayerCar::BossterOn(const FInputActionValue& value)
 {
+	UE_LOG(LogTemp, Error, TEXT("Booster"));
 }

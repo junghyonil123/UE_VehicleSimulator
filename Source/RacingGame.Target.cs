@@ -10,6 +10,6 @@ public class RacingGameTarget : TargetRules
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
 
-		ExtraModuleNames.AddRange( new string[] { "RacingGame" } );
+		ExtraModuleNames.AddRange( new string[] { "RacingGame"} );
 	}
 }
