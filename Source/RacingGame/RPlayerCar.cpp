@@ -23,13 +23,6 @@ void ARPlayerCar::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	RHUDObj = Cast<ARPlayerController>(GetWorld()->GetFirstPlayerController())->URHUDObject;
-	RHUDObj->SetGaugeProgress(MaxBoosterGauge, CurrentBoosterGauge);
-
-	UE_LOG(LogTemp, Warning, TEXT("Finded"));
-	//UE_LOG(LogTemp, Error, TEXT(wheeledComponent->GetEngineRotationSpeed()));
-	UE_LOG(LogTemp, Error, TEXT("Engine Rotation Speed: %f"), WheeledComponent->GetEngineRotationSpeed());
-
 	if (WheeledComponent->GetWheelState(1).bIsSkidding)
 	{
 		AddBosster(1);
@@ -42,24 +35,31 @@ void ARPlayerCar::Tick(float DeltaTime)
 
 void ARPlayerCar::AddBosster(int value)
 {
-	if (CurrentBoosterGauge + value < MaxBoosterGauge)
+	if (Stat->CurrentBoosterGauge + value < Stat->MaxBoosterGauge)
 	{
-		CurrentBoosterGauge += value;
+		Stat->CurrentBoosterGauge += value;
 	}
 	else 
 	{
-		CurrentBoosterGauge = MaxBoosterGauge;
+		Stat->CurrentBoosterGauge = Stat->MaxBoosterGauge;
 	}
-
+	
 	//해드업 디스플레이에 현재 값 반영
 }
 
 void ARPlayerCar::BossterOn(const FInputActionValue& value)
 {
-	if (CurrentBoosterGauge == MaxBoosterGauge)
+	if (Stat->CurrentBoosterGauge == Stat->MaxBoosterGauge)
 	{
 		UE_LOG(LogTemp, Error, TEXT("BoosterOn"));
-		CurrentBoosterGauge = 0;
+		Stat->CurrentBoosterGauge = 0;
 		WheeledComponent->IncreaseThrottleInput(1);
 	}
+}
+
+float ARPlayerCar::GetDamage()
+{
+	int Damage = Stat->BodyHardness * WheeledComponent->GetForwardSpeed();
+	Damage = Damage < 0 ? 0 : Damage;
+	return Damage;
 }

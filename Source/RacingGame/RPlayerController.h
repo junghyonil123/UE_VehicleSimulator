@@ -18,11 +18,14 @@ class RACINGGAME_API ARPlayerController : public APlayerController
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	TObjectPtr<class URHUD> URHUDObject;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
+	TObjectPtr<class ARPlayerCar> PlayerActor;
 	void BossterOn(const FInputActionValue& value);
 
 
 public:
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, Meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class UInputAction> BoosterOnAction;

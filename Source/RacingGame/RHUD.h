@@ -22,7 +22,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	TObjectPtr<class UWidget> WidgetObj;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
-	TObjectPtr<class UProgressBar> GaugeProgressBar;
+	TObjectPtr<class UProgressBar> GaugeProgressBar;	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
+	TObjectPtr<class UTextBlock> CarDamageValueText;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
+	TObjectPtr<class UTextBlock> ScoreValueText;
 
-	void SetGaugeProgress(float MaxValue, float CurValue);
+	void SetBoosterGaugeProgress(float MaxValue, float CurValue);
+	void SetDamageValue(int Damage);
 };

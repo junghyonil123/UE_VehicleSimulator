@@ -91,7 +91,7 @@ void ABrakeAbleGimmick::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,
 	ARPlayerCar* PlayerCar = Cast<ARPlayerCar>(OtherActor);
 	if (PlayerCar != nullptr)
 	{
-		if (PlayerCar->Stat->BodyDamage >= Stat->CurrentHp)
+		if (PlayerCar->GetDamage() >= Stat->CurrentHp)
 		{
 			UE_LOG(LogTemp, Error, TEXT("ak!"));
 			BlockBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
