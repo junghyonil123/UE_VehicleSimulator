@@ -30,4 +30,5 @@ public:
 
 	void SetBoosterGaugeProgress(float MaxValue, float CurValue);
 	void SetDamageValue(int Damage);
+	void SetScoreValue(float Score);
 };

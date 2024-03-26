@@ -34,5 +34,10 @@ void URHUD::SetDamageValue(int Damage)
 	CarDamageValueText->SetText(FText::FromString(FString::FromInt(Damage)));
 }
 
+void URHUD::SetScoreValue(float Score)
+{
+	ScoreValueText->SetText(FText::FromString(FString::SanitizeFloat(round(Score))));
+}
+
 
 

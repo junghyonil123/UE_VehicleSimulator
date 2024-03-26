@@ -20,6 +20,7 @@ void ARPlayerController::BeginPlay()
 	PlayerActor = Cast<ARPlayerCar>(GetPawn());
 	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
 	EnhancedInputComponent->BindAction(BoosterOnAction, ETriggerEvent::Triggered, this, &ARPlayerController::BossterOn);
+	
 }
 
 void ARPlayerController::Tick(float DeltaTime)
