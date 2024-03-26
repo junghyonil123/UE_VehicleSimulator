@@ -17,7 +17,6 @@
 ABrakeAbleGimmick::ABrakeAbleGimmick()
 {
 	PrimaryActorTick.bCanEverTick = true;
-	MaxHp = 100;
 	Stat = CreateDefaultSubobject<URObstacleStatComponent>(TEXT("Stat"));
 
 	HPBarWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("HOBARWIDGET"));
@@ -36,8 +35,8 @@ ABrakeAbleGimmick::ABrakeAbleGimmick()
 void ABrakeAbleGimmick::BeginPlay()
 {
 	Super::BeginPlay();
-	//Trigger->OnComponentBeginOverlap.AddDynamic(this, &ABrakeAbleGimmick::OnOverlapBegin);
-	Trigger->OnComponentHit.AddDynamic(this, &ABrakeAbleGimmick::OnHit);
+	Trigger->OnComponentBeginOverlap.AddDynamic(this, &ABrakeAbleGimmick::OnOverlapBegin);
+	//Trigger->OnComponentHit.AddDynamic(this, &ABrakeAbleGimmick::OnHit);
 
 	OnHpChanged.AddLambda([this]() -> void {
 		UE_LOG(LogTemp, Warning, TEXT("Delegate"));
@@ -47,11 +46,11 @@ void ABrakeAbleGimmick::BeginPlay()
 		if (HpBarWidgetTemp)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Set"));
-			HpBarWidgetTemp->SetHpBarValue(MaxHp, CurrentHp);
+			HpBarWidgetTemp->SetHpBarValue(Stat->MaxHp, Stat->CurrentHp);
 		}
 	});
 
-	SetCurrentHP(MaxHp);
+	SetCurrentHP(Stat->MaxHp);
 }
 
 // Called every frame
@@ -60,12 +59,34 @@ void ABrakeAbleGimmick::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void ABrakeAbleGimmick::SetCurrentHP(float value)
+{
+		Stat->CurrentHp = FMath::Clamp(Stat->CurrentHp + value, Stat->CurrentHp + value, Stat->MaxHp); OnHpChanged.Broadcast();
+}
+
 void ABrakeAbleGimmick::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 }
 
-void ABrakeAbleGimmick::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
+//void ABrakeAbleGimmick::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
+//{
+//	ARPlayerCar* PlayerCar = Cast<ARPlayerCar>(OtherActor);
+//	if (PlayerCar != nullptr)
+//	{
+//		if (PlayerCar->Stat->BodyDamage >= Stat->CurrentHp)
+//		{
+//			UE_LOG(LogTemp, Error, TEXT("ak!"));
+//			BlockBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+//		}
+//		else
+//		{
+//			return;
+//		}
+//	}
+//}
+
+void ABrakeAbleGimmick::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepHitResult)
 {
 	ARPlayerCar* PlayerCar = Cast<ARPlayerCar>(OtherActor);
 	if (PlayerCar != nullptr)
@@ -73,20 +94,12 @@ void ABrakeAbleGimmick::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAc
 		if (PlayerCar->Stat->BodyDamage >= Stat->CurrentHp)
 		{
 			UE_LOG(LogTemp, Error, TEXT("ak!"));
-			SetCurrentHP(-10);
-			Trigger->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			BlockBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		}
 		else
 		{
 			return;
 		}
 	}
-
 }
-//
-//void ABrakeAbleGimmick::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepHitResult)
-//{
-//	UE_LOG(LogTemp, Error, TEXT("ak!"));
-//	SetCurrentHP(-10);
-//}
 

@@ -19,8 +19,8 @@ public:
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	int MaxHp = 10;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
-	int CurrentHp = 10;
+	UPROPERTY(VisibleAnywhere, Category = Hyonil)
+	int CurrentHp;
 
 protected:
 	// Called when the game starts

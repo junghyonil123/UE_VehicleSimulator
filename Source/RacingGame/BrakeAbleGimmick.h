@@ -35,22 +35,20 @@ public:
 	TObjectPtr<class URObstacleStatComponent> Stat;
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = Hyonil)
-	float MaxHp;
-	FORCEINLINE void SetCurrentHP(float value) { CurrentHp = FMath::Clamp(CurrentHp + value, CurrentHp + value, MaxHp); OnHpChanged.Broadcast(); }
+	FORCEINLINE void SetCurrentHP(float value);
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	TObjectPtr<class UWidgetComponent> HPBarWidget;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
-	float CurrentHp;
 
 public:
 	virtual void PostInitializeComponents() override;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = Hyonil)
 	TObjectPtr<UBoxComponent> Trigger;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = Hyonil)
+	TObjectPtr<UBoxComponent> BlockBox;
 
 	UFUNCTION()
-	//void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepHitResult);
-	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepHitResult);
+	//void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 
 	//protected:
 //	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Components")
