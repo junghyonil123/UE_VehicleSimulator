@@ -20,12 +20,16 @@ class RACINGGAME_API UROnstacleHpBarWidget : public UUserWidget
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	TObjectPtr<class UProgressBar> HpProgressBar;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
+	TObjectPtr<class UTextBlock> HpText;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
 	TObjectPtr<class UWidget> WidgetTemp;
 
 	virtual void NativeConstruct() override;
 
 public:
 	void SetHpBarValue(float MaxHp, float CurHp);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Hyonil)
+	TObjectPtr<class URObstacleStatComponent> Stat;
 
 	//UPROPERTY()
 	//TObjectPtr<class UTextBlock> HpStat;
