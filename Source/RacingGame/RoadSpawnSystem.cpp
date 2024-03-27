@@ -17,28 +17,30 @@ void ARoadSpawnSystem::BeginPlay()
 {
 	Super::BeginPlay();
 
-	RoadManageArray.Add(SpwnRoad(FVector(0.0f, 0.0f, 0.0f)));
-
-	for (size_t i = 1; i < 5; i++)
-	{
-		RoadManageArray.Add(SpwnRoad(RoadManageArray[i - 1]->location));
-	}
+	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &ARoadSpawnSystem::StartSystem, 0.1f, true, 1);
 }
 
-RaodObject* ARoadSpawnSystem::SpwnRoad(FVector lastRoadPosition)
+ARaodObject* ARoadSpawnSystem::SpwnRoad(FVector lastRoadPosition)
 {
-	RaodObject* NewRoad = GetWorld()->SpawnActorDeferred<RaodObject>(RaodObject::StaticClass(), lastRoadPosition);
-	if (NewRoad)
-	return NewRoad();
+	FTransform NewTransform(lastRoadPosition + FVector(0.0f, 14000.0f, 0.0f));
+	ARaodObject* NewRoad = GetWorld()->SpawnActor<ARaodObject>(SpawnedRoadActor, NewTransform);
+	return NewRoad;
 }
-
-
 
 
 // Called every frame
 void ARoadSpawnSystem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
 
+void ARoadSpawnSystem::StartSystem()
+{
+	RoadManageArray.Add(SpwnRoad(FVector(0.0f, 0.0f, 0.0f)));
+
+	for (size_t i = 1; i < 5; i++)
+		RoadManageArray.Add(SpwnRoad(RoadManageArray[i - 1]->GetActorLocation()));
+
+	GetWorld()->GetTimerManager().ClearTimer(CountdownTimerHandle);
 }
 
