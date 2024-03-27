@@ -22,8 +22,9 @@ void ARoadSpawnSystem::BeginPlay()
 
 ARaodObject* ARoadSpawnSystem::SpwnRoad(FVector lastRoadPosition)
 {
-	FTransform NewTransform(lastRoadPosition + FVector(0.0f, 14000.0f, 0.0f));
+	FTransform NewTransform(lastRoadPosition + FVector(14000.0f, 0.0f, 0.0f));
 	ARaodObject* NewRoad = GetWorld()->SpawnActor<ARaodObject>(SpawnedRoadActor, NewTransform);
+	NewRoad->SetActorRelativeLocation(FVector(NewRoad->GetActorLocation().X, 0.0f, 100.0f));
 	return NewRoad;
 }
 
